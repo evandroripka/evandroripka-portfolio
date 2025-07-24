@@ -1,116 +1,120 @@
-# 🚀 3D Developer Portfolio
+# Evandro Ripka - Personal Portfolio
 
-A modern, animated 3D developer portfolio built with React, Three.js, TailwindCSS, and motion effects — designed to help you stand out and showcase your skills creatively.
+A modern, fully responsive and animated portfolio website built with **React**, **Vite**, and **TailwindCSS**, showcasing the developer's skills, background, and selected projects. It includes a secure contact form powered by a custom **Node.js mail server** using **Nodemailer**, fully integrated with a live domain (https://evandroripka.dev).
 
-![3d Portfolio Screenshot GitHub](https://github.com/user-attachments/assets/9b0ed20e-074e-4f2a-81d8-20c9da751e9e)
+## 🚀 Features
 
----
-
-## 📚 Table of Contents
-
-- [Features](#-features)
-- [Tech Stack](#-tech-stack)
-- [Project Structure](#-project-structure)
-- [Getting Started](#-getting-started)
-- [Assets](#-assets)
-- [Contact Me](#-contact-me)
-- [Suggestions or Feedback](#-suggestions-or-feedback)
-- [Like This Project?](#-like-this-project)
+- **React + Vite** for ultra-fast performance and build time
+- **TailwindCSS** for rapid and responsive design
+- **GSAP** for smooth animations
+- **Email form** with backend integration using **Nodemailer** and **Express.js**
+- **Production-ready** with Apache, SSL (Certbot), and reverse proxy
+- **VPS hosting** and custom domain setup
 
 ---
 
-## ✨ Features
-
-- 🔥 3D visuals powered by **React Three Fiber** and **Drei**
-- ⚡ Smooth transitions and scroll-based animations using **Framer Motion**
-- 🎨 Clean, responsive UI with **TailwindCSS**
-- 💌 Working contact form using **EmailJS**
-- 🧱 Beautiful UI enhancements with **Aceternity UI** and **Magic UI**
-- 🚀 Lightning-fast development with **Vite**
-
----
-
-## 🛠 Tech Stack
-
-| Tech              | Description                           |
-|-------------------|---------------------------------------|
-| React             | Front-end JavaScript library          |
-| Vite              | Fast bundler and dev environment      |
-| TailwindCSS       | Utility-first CSS framework           |
-| React Three Fiber | 3D rendering with Three.js in React   |
-| Drei              | Helpers and abstractions for R3F      |
-| Framer Motion     | Animation library for React           |
-| EmailJS           | Form handling and email integration   |
-| Aceternity UI     | Custom UI components                  |
-| Magic UI          | Prebuilt UI elements and design extras|
-
----
-
-## 📁 Project Structure
+## 🛠️ Project Structure
 
 ```bash
-├── public/
-│   ├── assets/             # Images, textures, models
-│   ├── models/             # 3D Astronaut model
-│   └── vite.svg
-├── src/
-│   ├── components/         # Reusable components
-│   ├── constants/          # Reusable datas
-│   ├── sections/           # Portfolio sections (Hero, About, etc.)
-│   ├── App.jsx             # Main app file
-│   ├── index.css           # Tailwind css
-│   └── main.jsx            # Entry point
-├── tailwind.config.js
+/evandroripka
+├── public
+├── src
+│   ├── assets         # Images, logos, icons
+│   ├── components     # Reusable React components
+│   ├── pages          # Route components (Home, Contact, etc.)
+│   ├── data           # Projects, experience, and skills data
+│   └── main.jsx       # Vite app entry point
+├── mail-server        # Node.js backend for contact form
+│   ├── index.js       # Express app with Nodemailer
+│   └── .env           # Your mail config (should be ignored by Git)
+├── .env
+├── .gitignore
+├── package.json
 └── vite.config.js
 ```
 
 ---
 
-## 🚀 Getting Started
-1. Clone the Repository
+## ⚙️ Setup Instructions
+
+### 1. Clone the Repository
+
 ```bash
-git clone https://github.com/Ali-Sanati/Portfolio.git
-cd Portfolio
+git clone https://github.com/evandroripka/evandroripka-portfolio.git
+cd evandroripka-portfolio
 ```
-2. Install Dependencies
+
+### 2. Install Dependencies (Frontend)
+
 ```bash
 npm install
 ```
-3. Run the Development Server
+
+### 3. Setup Mail Server
+
+Go into the `mail-server/` folder and install dependencies:
+
 ```bash
-npm run dev
+cd mail-server
+npm install
 ```
-The app will be available at http://localhost:5173.
+
+Create a `.env` file inside `mail-server/` with the following:
+
+```env
+EMAIL_HOST=host
+EMAIL_PORT=port
+EMAIL_USER=mail@yourhost
+EMAIL_PASS=your-secure-password
+```
+
+Then run the mail server:
+
+```bash
+node index.js
+```
+
+> ✅ The mail server listens on port `5000`. Ensure Apache is configured with reverse proxy for `/mail-server/send` to `localhost:5000/send`
 
 ---
 
-## 🔗 Assets
-Assets used in the project can be found [here](https://github.com/user-attachments/files/19820923/public.zip)
+## 🔐 Apache Reverse Proxy Config
+Make sure the following lines are present in your Apache virtual host:
+
+```apache
+ProxyPass "/mail-server/send" "http://localhost:5000/send"
+ProxyPassReverse "/mail-server/send" "http://localhost:5000/send"
+```
 
 ---
 
-## 📬 Contact Me
-[![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?logo=Instagram&logoColor=white)](https://www.instagram.com/ali.sanatidev/reels/) 
-[![Static Badge](https://img.shields.io/badge/Youtube-%23FF0033?style=flat&logo=youtube)](https://www.youtube.com/channel/UCZhtUWTtk3bGJiMPN9T4HWA)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/ali-sanati/) 
+## 🌐 Live Deployment
+
+The portfolio is deployed at: [https://evandroripka.dev](https://evandroripka.dev)
+
+Hosted on a VPS with:
+- Apache2
+- Let’s Encrypt SSL
+- DNS A record pointing to server IP
 
 ---
 
-## 💡 Suggestions or Feedback?
-Leave a comment on the [YouTube video](https://youtu.be/S9UQItTpwUQ) or open an issue here on GitHub.<br/>
-👉 What should I build next?
+## 💡 Tech Stack
 
-- A beautiful Landing Page
-
-- A complete E-commerce site
-
-- A fun App Clone (YouTube, Netflix, etc.)
-
-Or another interactive Portfolio
-
-Let me know!
+- **React + Vite**
+- **TailwindCSS**
+- **Node.js + Express + Nodemailer**
+- **GSAP** for animations
+- **Apache2 + Certbot** for production deployment
 
 ---
 
-## ⭐ Like This Project?
-Star the repo and [subscribe](https://www.youtube.com/channel/UCZhtUWTtk3bGJiMPN9T4HWA??sub_confirmation=1) to the YouTube channel for more dev content!
+## 📬 Contact
+For collaboration or freelance opportunities:
+**Email:** hey@evandroripka.dev
+
+---
+
+## 🧠 License
+
+This project is for personal use and portfolio demonstration. All custom code belongs to [Evandro Ripka](https://github.com/evandroripka).
